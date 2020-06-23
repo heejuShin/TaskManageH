@@ -6,6 +6,11 @@ import javax.swing.*;
 
 import Decorate.design.pattern.oodp.DecoName;
 import Decorate.design.pattern.oodp.JustName;
+import command.design.pattern.oodp.Command;
+import command.design.pattern.oodp.MeetingCommand;
+import command.design.pattern.oodp.Receiver;
+import command.design.pattern.oodp.ScheduleCommand;
+import command.design.pattern.oodp.TaskCommand;
 import Decorate.design.pattern.oodp.IsLeaderTopping;
 import Decorate.design.pattern.oodp.InChargeTopping;
 import task.management.oodp.TaskMenu;
@@ -53,14 +58,17 @@ public class Menu {
 		j1.setFont(f1);
 		j2.setFont(f1);
 	
+		Command TaskCommand = new TaskCommand();
+		Command MeetingCommand = new MeetingCommand();
+		Command ScheduleCommand = new ScheduleCommand();
 		
 		j1.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				TaskMenu taskMenu=new TaskMenu();
-				taskMenu.screen(user, group, color, f1);
-				
+				Receiver receiver = new Receiver();
+				receiver.setCommand(TaskCommand);
+				receiver.click(user, group, color, f1);		
 			}
 			
 		});
@@ -69,14 +77,12 @@ public class Menu {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				ScheduleMenu sMenu=new ScheduleMenu();
-				sMenu.screen(user, group, color, f1);
-				
+				Receiver receiver = new Receiver();
+				receiver.setCommand(ScheduleCommand);
+				receiver.click(user, group, color, f1);	
 			}
 			
 		});
 	}
-	
-	//Template method Design Pattern : https://jdm.kr/blog/116
 	
 }
